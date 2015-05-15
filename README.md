@@ -1,4 +1,4 @@
-# PThread
+Python
 Python Thread Study
 1.  Python Thread 基础
         在sleep千分之一秒后可以发现，多线程的随机运行
@@ -13,4 +13,10 @@ Python Thread Study
             当线程的run()方法结束时该线程完成。
             无法控制线程调度程序，但可以通过别的方式来影响线程调度的方式。
             基本的运行里没有共享数据，没有锁的实现
-2.  Python 
+2.  Python 中的互斥锁或同步锁
+        lock=threading.Lock()生成一个锁对象
+        lock.acquire([time])对资源加锁，在同一时刻只有一个线程会得到锁，time是个可选的时间值，如果在time时间内没有得到锁\
+            会返回false以进行其它后继的处理
+        lock.release()方法释放锁后，其它的线程才会再次进行抢锁操作
+3.  Python中的死锁以及可重入锁 
+        死锁的原因是锁A会依赖B锁的释放而释放，B锁会依赖A锁的释放而释放，如果都正常释放不会有问题，如果哪一方没即时放锁，则会死锁

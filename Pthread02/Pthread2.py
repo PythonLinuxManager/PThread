@@ -8,20 +8,25 @@ import time
 class Mythread(threading.Thread):
 	def run(self):
 		global num
-		num += 1
-		time.sleep(0.001)
-		msg = self.name+' set num to '+str(num)
-		print (msg)
+		if mutex.acquire(1):  # 加锁就ok,注意要把锁定区域定下
+			num += 1
+			time.sleep(0.002)
+			mutex.release()
+			msg = self.name + ' set num to ' + str(num)
+			print(msg)
+		return
 
 
 def test():
 	global num
 	for i in range(100):
-		M=Mythread()
+		M = Mythread()
 		M.start()
 	return
 
+
 if __name__ == '__main__':
 	global num
+	mutex = threading.Lock()
 	num = 0
 	test()
