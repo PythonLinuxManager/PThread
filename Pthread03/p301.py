@@ -6,6 +6,24 @@ import time
 死锁：
 	有两个锁，MA和MB
 	有两个资源，RA和RB
+	两锁嵌套，相互依赖，则随机产生死锁
+	伪码如下，线程数量越多越容易产生死锁
+	function1(
+	ma.acquire
+	mb.acquire
+	mb.release
+	ma.release
+	)
+	function2(
+	mb.acquire
+	ma.acquire
+	ma.release
+	mb.release
+	)
+	run(
+	function1()
+	function2()
+	)
 
 '''
 ma = threading.RLock()
